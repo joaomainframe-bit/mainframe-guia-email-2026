@@ -203,6 +203,30 @@ deles está errada em três sítios (o list_id/from/template_id ao nível da ac�
 o entry_action_id em falta no exemplo, e o smart sending ligado por omissão) e
 estas ferramentas já os contornam. o kit/readme.md explica cada um.
 
+e cinco coisas sobre o pop-up que a documentação não diz e que custam meia hora
+a descobrir uma a uma. estão todas medidas, num form que o klaviyo aceitou:
+
+- **`post /forms` funciona.** a referência pública só mostra o get. não
+  concluas daí que não dá — dá, e é assim que o pop-up entra.
+- **a forma do corpo não se inventa.** é
+  `data.attributes.definition.versions[0].steps[]`, e cada passo é
+  `columns[].rows[].blocks[]`. se não tens um form que já passou para copiar,
+  cria um à mão no editor do klaviyo, lê-o com get, e usa-o como molde.
+- **só existem estes blocos: `html_text`, `dropdown`, `email`, `button`.**
+  não há `radio` nem `checkbox`. uma pergunta de escolha múltipla com cartões
+  bonitos não entra por api — vira lista pendente. decide isso comigo antes de
+  desenhares o pop-up, não depois.
+- **`link` não é campo de `buttonproperties`.** um url num botão dá 400. se
+  precisas de mandar a pessoa para o carrinho, mete o link no `html_text`.
+- **`additional-fields[form]=definition` não existe.** ao ler o form de volta,
+  pede-o sem esse parâmetro ou levas 400.
+
+e uma que não é bug, é limite: **a lista de destino não se liga por api.**
+o corpo de criação não tem campo para ela e `get /forms/{id}/lists` dá 404. o
+form nasce sem lista e liga-se no editor, ao publicar. enquanto for rascunho não
+recolhe nada, por isso não é bloqueio — mas diz-mo na paragem 3, para eu saber
+que tenho esse clique para dar.
+
 ═══ antes de começar: pergunta-me ═══
 
 1. qual é o url da loja?
@@ -457,7 +481,7 @@ homepage — reduzir a fricção é uma decisão de layout, não de copy.
 
 ═══ a variedade ═══
 
-trinta e três emails feitos um a um convergem sempre para a peça que sabes
+trinta e um emails feitos um a um convergem sempre para a peça que sabes
 fazer melhor. estas regras existem para isso não acontecer, e são contáveis:
 não são um pedido de variedade, são um limite.
 
@@ -705,11 +729,17 @@ espera, o assunto e o preview text; por campanha o mesmo, sem esperas.
 - se a métrica que um flow precisa não existir, pára nesse flow e diz-me qual.
   não escolhas outra parecida.
 
+e o pop-up, que foi desenhado na paragem 1 e ainda não existe no klaviyo.
+escreve o popup.klaviyo.json ao lado do programa.json, na forma que está lá em
+cima, e diz-me numa linha: quantos passos, que blocos em cada um, e o
+property_name de cada campo. se a pergunta que aprovámos na paragem 1 não
+couber num dropdown, é agora que mo dizes — não depois de o criar.
+
 e antes de criar seja o que for, verifica em todos os emails: tem
 {% unsubscribe_link %}, não tem href="#", não tem [placeholder] por preencher.
 diz-me o que falha. nada disto impede o rascunho, tudo isto impede o envio.
 
-mostra-me o programa.json e espera.
+mostra-me o programa.json e o popup.klaviyo.json, e espera.
 
 ═══ construir ═══
 
@@ -718,7 +748,12 @@ se já existir um flow com o mesmo nome e estiver live, não lhe tocas.
 se falhar a meio, não recomeces do zero: diz-me o que já ficou feito.
 
 depois lê de volta do klaviyo e mostra-me: flow, estado, número de emails,
-template de cada um, e se o smart sending ficou desligado.
+template de cada um, e se o smart sending ficou desligado. e o pop-up: id,
+estado, passos, blocos e o property_name de cada campo.
+
+se a conta já tiver trabalho de outra marca lá dentro, não lhe tocas — nem
+apagas, nem renomeias, nem substituis. conta o que lá estava antes e o que lá
+está depois, e mostra-me os dois números.
 
 renderiza um dos emails de carrinho pela api do klaviyo com dados de exemplo
 e mostra-me o resultado. se sobrar algum {{ }} por resolver, diz-mo.
@@ -748,6 +783,30 @@ construir-tudo.mjs. NÃO escrevas API do Klaviyo de raiz: a documentação públ
 deles está errada em três sítios (o list_id/from/template_id ao nível da acção,
 o entry_action_id em falta no exemplo, e o Smart Sending ligado por omissão) e
 estas ferramentas já os contornam. O kit/README.md explica cada um.
+
+E cinco coisas sobre o POP-UP que a documentação não diz e que custam meia hora
+a descobrir uma a uma. Estão todas medidas, num form que o Klaviyo aceitou:
+
+- **`POST /forms` funciona.** A referência pública só mostra o GET. Não
+  concluas daí que não dá — dá, e é assim que o pop-up entra.
+- **A forma do corpo não se inventa.** É
+  `data.attributes.definition.versions[0].steps[]`, e cada passo é
+  `columns[].rows[].blocks[]`. Se não tens um form que já passou para copiar,
+  cria um à mão no editor do Klaviyo, lê-o com GET, e usa-o como molde.
+- **Só existem estes blocos: `html_text`, `dropdown`, `email`, `button`.**
+  Não há `radio` nem `checkbox`. Uma pergunta de escolha múltipla com cartões
+  bonitos NÃO entra por API — vira lista pendente. Decide isso comigo antes de
+  desenhares o pop-up, não depois.
+- **`link` não é campo de `ButtonProperties`.** Um URL num botão dá 400. Se
+  precisas de mandar a pessoa para o carrinho, mete o link no `html_text`.
+- **`additional-fields[form]=definition` não existe.** Ao ler o form de volta,
+  pede-o sem esse parâmetro ou levas 400.
+
+E uma que não é bug, é limite: **a lista de destino não se liga por API.**
+O corpo de criação não tem campo para ela e `GET /forms/{id}/lists` dá 404. O
+form nasce sem lista e liga-se no editor, ao publicar. Enquanto for rascunho não
+recolhe nada, por isso não é bloqueio — mas diz-mo na paragem 3, para eu saber
+que tenho esse clique para dar.
 
 ═══ ANTES DE COMEÇAR: PERGUNTA-ME ═══
 
@@ -1003,7 +1062,7 @@ homepage — reduzir a fricção é uma decisão de layout, não de copy.
 
 ═══ A VARIEDADE ═══
 
-Trinta e três emails feitos um a um convergem sempre para a peça que sabes
+Trinta e um emails feitos um a um convergem sempre para a peça que sabes
 fazer melhor. Estas regras existem para isso não acontecer, e são contáveis:
 não são um pedido de variedade, são um limite.
 
@@ -1251,11 +1310,17 @@ espera, o assunto e o preview text; por campanha o mesmo, sem esperas.
 - Se a métrica que um flow precisa não existir, PÁRA nesse flow e diz-me qual.
   Não escolhas outra parecida.
 
+E o POP-UP, que foi desenhado na paragem 1 e ainda não existe no Klaviyo.
+Escreve o popup.klaviyo.json ao lado do programa.json, na forma que está lá em
+cima, e diz-me numa linha: quantos passos, que blocos em cada um, e o
+property_name de cada campo. Se a pergunta que aprovámos na paragem 1 não
+couber num dropdown, é AGORA que mo dizes — não depois de o criar.
+
 E antes de criar seja o que for, verifica em todos os emails: tem
 {% unsubscribe_link %}, não tem href="#", não tem [placeholder] por preencher.
 Diz-me o que falha. Nada disto impede o rascunho, tudo isto impede o envio.
 
-Mostra-me o programa.json e espera.
+Mostra-me o programa.json e o popup.klaviyo.json, e espera.
 
 ═══ CONSTRUIR ═══
 
@@ -1264,7 +1329,12 @@ Se já existir um flow com o mesmo nome e estiver LIVE, não lhe tocas.
 Se falhar a meio, não recomeces do zero: diz-me o que já ficou feito.
 
 Depois lê de volta do Klaviyo e mostra-me: flow, estado, número de emails,
-template de cada um, e se o Smart Sending ficou desligado.
+template de cada um, e se o Smart Sending ficou desligado. E o pop-up: id,
+estado, passos, blocos e o property_name de cada campo.
+
+Se a conta já tiver trabalho de OUTRA marca lá dentro, não lhe tocas — nem
+apagas, nem renomeias, nem substituis. Conta o que lá estava antes e o que lá
+está depois, e mostra-me os dois números.
 
 Renderiza um dos emails de carrinho pela API do Klaviyo com dados de exemplo
 e mostra-me o resultado. Se sobrar algum {{ }} por resolver, diz-mo.
