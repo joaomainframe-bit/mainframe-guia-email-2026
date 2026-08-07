@@ -1,0 +1,1168 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rever o deck · 94 slides</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0a0a0a">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0a0a0a;color:#f6f6f6;
+  font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;padding-bottom:120px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+header{padding:34px 0 22px}
+h1{font-size:clamp(24px,5vw,38px);letter-spacing:-.02em;margin:0 0 6px}
+.sub{color:#8f849b;margin:0;font-size:15px}
+
+.barra{position:sticky;top:0;z-index:30;background:rgba(10,10,10,.94);
+  backdrop-filter:blur(14px);border-bottom:1px solid #201a26}
+.barra .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding-top:10px;padding-bottom:10px}
+.cnt{display:flex;gap:16px;font-size:14px;font-variant-numeric:tabular-nums}
+.cnt b{font-weight:600}
+.cnt .ok b{color:#5ec97a}.cnt .ko b{color:#e8705f}.cnt .lk b{color:#c05dc8}.cnt .na b{color:#6b6475}
+.barra .esp{flex:1}
+.filtro,.exp{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);
+  color:#f6f6f6;border-radius:9px;padding:8px 13px;font-size:14px;cursor:pointer;font-family:inherit}
+.filtro.on{background:#c05dc8;color:#12081a;border-color:#c05dc8;font-weight:600}
+.exp{background:#c05dc8;color:#12081a;border-color:#c05dc8;font-weight:600}
+
+.s{margin:0 0 30px;border-radius:12px;overflow:hidden;border:2px solid transparent;
+  transition:border-color .12s,opacity .12s}
+.s img{width:100%;height:auto;display:block;background:#151119}
+.s[data-e="up"]  {border-color:#2f6b41}
+.s[data-e="down"]{border-color:#8a3a2e}
+.s[data-e="lock"]{border-color:#c05dc8;opacity:.55}
+.s.oculto{display:none}
+
+.cab{display:flex;align-items:center;gap:11px;padding:9px 12px;background:#141118;font-size:14px}
+.n{font-variant-numeric:tabular-nums;color:#5f5768;min-width:2.4ch}
+.lab{flex:1;color:#cfc7d6}
+.est{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6b6475}
+
+.acts{display:flex;gap:8px;padding:10px 12px;background:#141118;align-items:center;flex-wrap:wrap}
+.b{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#f6f6f6;
+  border-radius:9px;padding:9px 14px;font-size:17px;cursor:pointer;line-height:1;font-family:inherit}
+.b.lock{font-size:13px;font-weight:600;letter-spacing:.02em}
+.b:hover{background:rgba(255,255,255,.13)}
+.s[data-e="up"]   .b.up  {background:#2f6b41;border-color:#3d8a54}
+.s[data-e="down"] .b.down{background:#8a3a2e;border-color:#a8493a}
+.s[data-e="lock"] .b.lock{background:#c05dc8;border-color:#c05dc8;color:#12081a}
+.nota{flex:1;min-width:180px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
+  color:#f6f6f6;border-radius:9px;padding:9px 12px;font-size:14px;font-family:inherit}
+.nota::placeholder{color:#6b6475}
+
+.rodape{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(10,10,10,.96);
+  backdrop-filter:blur(14px);border-top:1px solid #201a26;padding:12px 0}
+.rodape .wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.rodape small{color:#8f849b;font-size:13px}
+#saida{position:fixed;inset:6% 8%;z-index:50;display:none;background:#151119;border:1px solid #2a2430;
+  border-radius:14px;padding:18px}
+#saida textarea{width:100%;height:calc(100% - 56px);background:#0d0b10;color:#f6f6f6;border:1px solid #2a2430;
+  border-radius:10px;padding:14px;font:400 13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;resize:none}
+#saida .fecha{margin-top:10px}
+@media(max-width:640px){ .s{margin-bottom:20px} .cnt{gap:10px;font-size:13px} }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <h1>Rever o deck</h1>
+  <p class="sub">Polegar para cima aprova. Para baixo marca para refazer. <b>Lock</b> fecha o slide — não se mexe mais. Guarda-se sozinho neste browser.</p>
+</header>
+
+<div class="barra"><div class="wrap">
+  <div class="cnt">
+    <span class="ok">👍 <b id="c-up">0</b></span>
+    <span class="ko">👎 <b id="c-down">0</b></span>
+    <span class="lk">🔒 <b id="c-lock">0</b></span>
+    <span class="na">— <b id="c-na">0</b></span>
+  </div>
+  <span class="esp"></span>
+  <button class="filtro on" data-f="todos">Todos</button>
+  <button class="filtro" data-f="abertos">Por decidir</button>
+  <button class="filtro" data-f="down">A refazer</button>
+</div></div>
+
+<main class="wrap">
+<article class="s" data-n="1" id="s1">
+  <div class="cab"><span class="n">1</span><span class="lab">Capa</span><span class="est"></span></div>
+  <img src="slides/s-01.jpg" alt="Slide 1" width="1440" height="810">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="2" id="s2">
+  <div class="cab"><span class="n">2</span><span class="lab">Porque é o email</span><span class="est"></span></div>
+  <img src="slides/s-02.jpg" alt="Slide 2" width="1440" height="810">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="3" id="s3">
+  <div class="cab"><span class="n">3</span><span class="lab">O que precisas</span><span class="est"></span></div>
+  <img src="slides/s-03.jpg" alt="Slide 3" width="1440" height="810">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="4" id="s4">
+  <div class="cab"><span class="n">4</span><span class="lab">A promessa</span><span class="est"></span></div>
+  <img src="slides/s-04.jpg" alt="Slide 4" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="5" id="s5">
+  <div class="cab"><span class="n">5</span><span class="lab">Os 16</span><span class="est"></span></div>
+  <img src="slides/s-05.jpg" alt="Slide 5" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="6" id="s6">
+  <div class="cab"><span class="n">6</span><span class="lab">João Pinto · €4M</span><span class="est"></span></div>
+  <img src="slides/s-06.jpg" alt="Slide 6" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="7" id="s7">
+  <div class="cab"><span class="n">7</span><span class="lab">30%</span><span class="est"></span></div>
+  <img src="slides/s-07.jpg" alt="Slide 7" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="8" id="s8">
+  <div class="cab"><span class="n">8</span><span class="lab">Índice</span><span class="est"></span></div>
+  <img src="slides/s-08.jpg" alt="Slide 8" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="9" id="s9">
+  <div class="cab"><span class="n">9</span><span class="lab">Podia dar-te o prompt</span><span class="est"></span></div>
+  <img src="slides/s-09.jpg" alt="Slide 9" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="10" id="s10">
+  <div class="cab"><span class="n">10</span><span class="lab">Mas não saberias corrigi-lo</span><span class="est"></span></div>
+  <img src="slides/s-10.jpg" alt="Slide 10" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="11" id="s11">
+  <div class="cab"><span class="n">11</span><span class="lab">MÓDULO 1</span><span class="est"></span></div>
+  <img src="slides/s-11.jpg" alt="Slide 11" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="12" id="s12">
+  <div class="cab"><span class="n">12</span><span class="lab">As seis regras</span><span class="est"></span></div>
+  <img src="slides/s-12.jpg" alt="Slide 12" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="13" id="s13">
+  <div class="cab"><span class="n">13</span><span class="lab">R1 · 600px</span><span class="est"></span></div>
+  <img src="slides/s-13.jpg" alt="Slide 13" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="14" id="s14">
+  <div class="cab"><span class="n">14</span><span class="lab">R2 · um tópico</span><span class="est"></span></div>
+  <img src="slides/s-14.jpg" alt="Slide 14" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="15" id="s15">
+  <div class="cab"><span class="n">15</span><span class="lab">R3 · punchy</span><span class="est"></span></div>
+  <img src="slides/s-15.jpg" alt="Slide 15" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="16" id="s16">
+  <div class="cab"><span class="n">16</span><span class="lab">R3 · exceções</span><span class="est"></span></div>
+  <img src="slides/s-16.jpg" alt="Slide 16" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="17" id="s17">
+  <div class="cab"><span class="n">17</span><span class="lab">R4 · infográficos</span><span class="est"></span></div>
+  <img src="slides/s-17.jpg" alt="Slide 17" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="18" id="s18">
+  <div class="cab"><span class="n">18</span><span class="lab">R5 · transições</span><span class="est"></span></div>
+  <img src="slides/s-18.jpg" alt="Slide 18" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="19" id="s19">
+  <div class="cab"><span class="n">19</span><span class="lab">R6 · dark mode</span><span class="est"></span></div>
+  <img src="slides/s-19.jpg" alt="Slide 19" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="20" id="s20">
+  <div class="cab"><span class="n">20</span><span class="lab">Oito que cumprem · 1</span><span class="est"></span></div>
+  <img src="slides/s-20.jpg" alt="Slide 20" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="21" id="s21">
+  <div class="cab"><span class="n">21</span><span class="lab">Oito que cumprem · 2</span><span class="est"></span></div>
+  <img src="slides/s-21.jpg" alt="Slide 21" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="22" id="s22">
+  <div class="cab"><span class="n">22</span><span class="lab">MÓDULO 2</span><span class="est"></span></div>
+  <img src="slides/s-22.jpg" alt="Slide 22" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="23" id="s23">
+  <div class="cab"><span class="n">23</span><span class="lab">A régua do open rate</span><span class="est"></span></div>
+  <img src="slides/s-23.jpg" alt="Slide 23" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="24" id="s24">
+  <div class="cab"><span class="n">24</span><span class="lab">Entregabilidade, não performance</span><span class="est"></span></div>
+  <img src="slides/s-24.jpg" alt="Slide 24" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="25" id="s25">
+  <div class="cab"><span class="n">25</span><span class="lab">O pânico do 1%</span><span class="est"></span></div>
+  <img src="slides/s-25.jpg" alt="Slide 25" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="26" id="s26">
+  <div class="cab"><span class="n">26</span><span class="lab">A escada</span><span class="est"></span></div>
+  <img src="slides/s-26.jpg" alt="Slide 26" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="27" id="s27">
+  <div class="cab"><span class="n">27</span><span class="lab">Segmentos</span><span class="est"></span></div>
+  <img src="slides/s-27.jpg" alt="Slide 27" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="28" id="s28">
+  <div class="cab"><span class="n">28</span><span class="lab">MÓDULO 3</span><span class="est"></span></div>
+  <img src="slides/s-28.jpg" alt="Slide 28" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="29" id="s29">
+  <div class="cab"><span class="n">29</span><span class="lab">O funil</span><span class="est"></span></div>
+  <img src="slides/s-29.jpg" alt="Slide 29" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="30" id="s30">
+  <div class="cab"><span class="n">30</span><span class="lab">O funil com e sem pop-up</span><span class="est"></span></div>
+  <img src="slides/s-30.jpg" alt="Slide 30" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="31" id="s31">
+  <div class="cab"><span class="n">31</span><span class="lab">Os sete erros · 1-4</span><span class="est"></span></div>
+  <img src="slides/s-31.jpg" alt="Slide 31" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="32" id="s32">
+  <div class="cab"><span class="n">32</span><span class="lab">Os sete erros · 5-7</span><span class="est"></span></div>
+  <img src="slides/s-32.jpg" alt="Slide 32" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="33" id="s33">
+  <div class="cab"><span class="n">33</span><span class="lab">2025 vs 2026</span><span class="est"></span></div>
+  <img src="slides/s-33.jpg" alt="Slide 33" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="34" id="s34">
+  <div class="cab"><span class="n">34</span><span class="lab">Uma pergunta</span><span class="est"></span></div>
+  <img src="slides/s-34.jpg" alt="Slide 34" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="35" id="s35">
+  <div class="cab"><span class="n">35</span><span class="lab">AVANÇADO · o quiz</span><span class="est"></span></div>
+  <img src="slides/s-35.jpg" alt="Slide 35" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="36" id="s36">
+  <div class="cab"><span class="n">36</span><span class="lab">A resposta muda o email · Foodies</span><span class="est"></span></div>
+  <img src="slides/s-36.jpg" alt="Slide 36" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="37" id="s37">
+  <div class="cab"><span class="n">37</span><span class="lab">A resposta muda o email · iFrame</span><span class="est"></span></div>
+  <img src="slides/s-37.jpg" alt="Slide 37" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="38" id="s38">
+  <div class="cab"><span class="n">38</span><span class="lab">MÓDULO 4</span><span class="est"></span></div>
+  <img src="slides/s-38.jpg" alt="Slide 38" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="39" id="s39">
+  <div class="cab"><span class="n">39</span><span class="lab">Quatro flows</span><span class="est"></span></div>
+  <img src="slides/s-39.jpg" alt="Slide 39" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="40" id="s40">
+  <div class="cab"><span class="n">40</span><span class="lab">O welcome flow · estrutura</span><span class="est"></span></div>
+  <img src="slides/s-40.jpg" alt="Slide 40" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="41" id="s41">
+  <div class="cab"><span class="n">41</span><span class="lab">welcome · a série</span><span class="est"></span></div>
+  <img src="slides/s-41.jpg" alt="Slide 41" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="42" id="s42">
+  <div class="cab"><span class="n">42</span><span class="lab">3 erros welcome</span><span class="est"></span></div>
+  <img src="slides/s-42.jpg" alt="Slide 42" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="43" id="s43">
+  <div class="cab"><span class="n">43</span><span class="lab">O site abandon · estrutura</span><span class="est"></span></div>
+  <img src="slides/s-43.jpg" alt="Slide 43" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="44" id="s44">
+  <div class="cab"><span class="n">44</span><span class="lab">site · a série</span><span class="est"></span></div>
+  <img src="slides/s-44.jpg" alt="Slide 44" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="45" id="s45">
+  <div class="cab"><span class="n">45</span><span class="lab">O browse abandon · estrutura</span><span class="est"></span></div>
+  <img src="slides/s-45.jpg" alt="Slide 45" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="46" id="s46">
+  <div class="cab"><span class="n">46</span><span class="lab">browse · a série</span><span class="est"></span></div>
+  <img src="slides/s-46.jpg" alt="Slide 46" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="47" id="s47">
+  <div class="cab"><span class="n">47</span><span class="lab">Carrinho / checkout abandonado · estrutura</span><span class="est"></span></div>
+  <img src="slides/s-47.jpg" alt="Slide 47" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="48" id="s48">
+  <div class="cab"><span class="n">48</span><span class="lab">carrinho · a série</span><span class="est"></span></div>
+  <img src="slides/s-48.jpg" alt="Slide 48" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="49" id="s49">
+  <div class="cab"><span class="n">49</span><span class="lab">Erros dos emails de abandono</span><span class="est"></span></div>
+  <img src="slides/s-49.jpg" alt="Slide 49" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="50" id="s50">
+  <div class="cab"><span class="n">50</span><span class="lab">Smart Sending</span><span class="est"></span></div>
+  <img src="slides/s-50.jpg" alt="Slide 50" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="51" id="s51">
+  <div class="cab"><span class="n">51</span><span class="lab">MÓDULO 5</span><span class="est"></span></div>
+  <img src="slides/s-51.jpg" alt="Slide 51" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="52" id="s52">
+  <div class="cab"><span class="n">52</span><span class="lab">Educar, educar, vender</span><span class="est"></span></div>
+  <img src="slides/s-52.jpg" alt="Slide 52" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="53" id="s53">
+  <div class="cab"><span class="n">53</span><span class="lab">Os quatro tipos</span><span class="est"></span></div>
+  <img src="slides/s-53.jpg" alt="Slide 53" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="54" id="s54">
+  <div class="cab"><span class="n">54</span><span class="lab">Uma promoção é uma sequência</span><span class="est"></span></div>
+  <img src="slides/s-54.jpg" alt="Slide 54" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="55" id="s55">
+  <div class="cab"><span class="n">55</span><span class="lab">Venda · Piranha</span><span class="est"></span></div>
+  <img src="slides/s-55.jpg" alt="Slide 55" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="56" id="s56">
+  <div class="cab"><span class="n">56</span><span class="lab">Venda · iFrame</span><span class="est"></span></div>
+  <img src="slides/s-56.jpg" alt="Slide 56" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="57" id="s57">
+  <div class="cab"><span class="n">57</span><span class="lab">Engajamento · exemplos</span><span class="est"></span></div>
+  <img src="slides/s-57.jpg" alt="Slide 57" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="58" id="s58">
+  <div class="cab"><span class="n">58</span><span class="lab">Lançamento · exemplos</span><span class="est"></span></div>
+  <img src="slides/s-58.jpg" alt="Slide 58" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="59" id="s59">
+  <div class="cab"><span class="n">59</span><span class="lab">20 frameworks · educativas</span><span class="est"></span></div>
+  <img src="slides/s-59.jpg" alt="Slide 59" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="60" id="s60">
+  <div class="cab"><span class="n">60</span><span class="lab">Educativa · exemplos</span><span class="est"></span></div>
+  <img src="slides/s-60.jpg" alt="Slide 60" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="61" id="s61">
+  <div class="cab"><span class="n">61</span><span class="lab">MÓDULO 6</span><span class="est"></span></div>
+  <img src="slides/s-61.jpg" alt="Slide 61" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="62" id="s62">
+  <div class="cab"><span class="n">62</span><span class="lab">Cinco fases</span><span class="est"></span></div>
+  <img src="slides/s-62.jpg" alt="Slide 62" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="63" id="s63">
+  <div class="cab"><span class="n">63</span><span class="lab">Novembro</span><span class="est"></span></div>
+  <img src="slides/s-63.jpg" alt="Slide 63" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="64" id="s64">
+  <div class="cab"><span class="n">64</span><span class="lab">Os tipos de oferta</span><span class="est"></span></div>
+  <img src="slides/s-64.jpg" alt="Slide 64" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="65" id="s65">
+  <div class="cab"><span class="n">65</span><span class="lab">Early Access · Lusitanna</span><span class="est"></span></div>
+  <img src="slides/s-65.jpg" alt="Slide 65" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="66" id="s66">
+  <div class="cab"><span class="n">66</span><span class="lab">Black Friday · Olympus</span><span class="est"></span></div>
+  <img src="slides/s-66.jpg" alt="Slide 66" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="67" id="s67">
+  <div class="cab"><span class="n">67</span><span class="lab">Cyber Monday · 8000Kicks</span><span class="est"></span></div>
+  <img src="slides/s-67.jpg" alt="Slide 67" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="68" id="s68">
+  <div class="cab"><span class="n">68</span><span class="lab">Os emails de texto</span><span class="est"></span></div>
+  <img src="slides/s-68.jpg" alt="Slide 68" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="69" id="s69">
+  <div class="cab"><span class="n">69</span><span class="lab">Dezembro</span><span class="est"></span></div>
+  <img src="slides/s-69.jpg" alt="Slide 69" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="70" id="s70">
+  <div class="cab"><span class="n">70</span><span class="lab">BF · os flows trocam</span><span class="est"></span></div>
+  <img src="slides/s-70.jpg" alt="Slide 70" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="71" id="s71">
+  <div class="cab"><span class="n">71</span><span class="lab">Os flows de BF</span><span class="est"></span></div>
+  <img src="slides/s-71.jpg" alt="Slide 71" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="72" id="s72">
+  <div class="cab"><span class="n">72</span><span class="lab">Adapta o pop-up</span><span class="est"></span></div>
+  <img src="slides/s-72.jpg" alt="Slide 72" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="73" id="s73">
+  <div class="cab"><span class="n">73</span><span class="lab">BF pop-up · 8000Kicks</span><span class="est"></span></div>
+  <img src="slides/s-73.jpg" alt="Slide 73" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="74" id="s74">
+  <div class="cab"><span class="n">74</span><span class="lab">BF pop-up · iFrame</span><span class="est"></span></div>
+  <img src="slides/s-74.jpg" alt="Slide 74" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="75" id="s75">
+  <div class="cab"><span class="n">75</span><span class="lab">MÓDULO 7 · O Claude</span><span class="est"></span></div>
+  <img src="slides/s-75.jpg" alt="Slide 75" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="76" id="s76">
+  <div class="cab"><span class="n">76</span><span class="lab">O que este prompt faz</span><span class="est"></span></div>
+  <img src="slides/s-76.jpg" alt="Slide 76" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="77" id="s77">
+  <div class="cab"><span class="n">77</span><span class="lab">Paragem 1 · a marca</span><span class="est"></span></div>
+  <img src="slides/s-77.jpg" alt="Slide 77" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="78" id="s78">
+  <div class="cab"><span class="n">78</span><span class="lab">Paragem 2 · os emails</span><span class="est"></span></div>
+  <img src="slides/s-78.jpg" alt="Slide 78" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="79" id="s79">
+  <div class="cab"><span class="n">79</span><span class="lab">Paragem 3 · antes do Klaviyo</span><span class="est"></span></div>
+  <img src="slides/s-79.jpg" alt="Slide 79" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="80" id="s80">
+  <div class="cab"><span class="n">80</span><span class="lab">Outras coisas com o Claude</span><span class="est"></span></div>
+  <img src="slides/s-80.jpg" alt="Slide 80" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="81" id="s81">
+  <div class="cab"><span class="n">81</span><span class="lab">RESERVADO · vídeo</span><span class="est"></span></div>
+  <img src="slides/s-81.jpg" alt="Slide 81" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="82" id="s82">
+  <div class="cab"><span class="n">82</span><span class="lab">MÓDULO 8 · A imagem</span><span class="est"></span></div>
+  <img src="slides/s-82.jpg" alt="Slide 82" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="83" id="s83">
+  <div class="cab"><span class="n">83</span><span class="lab">O welcome, antes e depois</span><span class="est"></span></div>
+  <img src="slides/s-83.jpg" alt="Slide 83" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="84" id="s84">
+  <div class="cab"><span class="n">84</span><span class="lab">Forma 1 · Copiar</span><span class="est"></span></div>
+  <img src="slides/s-84.jpg" alt="Slide 84" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="85" id="s85">
+  <div class="cab"><span class="n">85</span><span class="lab">Forma 2 · Adaptar · ARMRA e Atoms</span><span class="est"></span></div>
+  <img src="slides/s-85.jpg" alt="Slide 85" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="86" id="s86">
+  <div class="cab"><span class="n">86</span><span class="lab">Forma 2 · Adaptar · Seed e Magic Mind</span><span class="est"></span></div>
+  <img src="slides/s-86.jpg" alt="Slide 86" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="87" id="s87">
+  <div class="cab"><span class="n">87</span><span class="lab">Três heroes gerados</span><span class="est"></span></div>
+  <img src="slides/s-87.jpg" alt="Slide 87" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="88" id="s88">
+  <div class="cab"><span class="n">88</span><span class="lab">O prompt está no guia</span><span class="est"></span></div>
+  <img src="slides/s-88.jpg" alt="Slide 88" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="89" id="s89">
+  <div class="cab"><span class="n">89</span><span class="lab">Onde foi feito</span><span class="est"></span></div>
+  <img src="slides/s-89.jpg" alt="Slide 89" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="90" id="s90">
+  <div class="cab"><span class="n">90</span><span class="lab">FECHO</span><span class="est"></span></div>
+  <img src="slides/s-90.jpg" alt="Slide 90" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="91" id="s91">
+  <div class="cab"><span class="n">91</span><span class="lab">Três passos</span><span class="est"></span></div>
+  <img src="slides/s-91.jpg" alt="Slide 91" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="92" id="s92">
+  <div class="cab"><span class="n">92</span><span class="lab">A oferta</span><span class="est"></span></div>
+  <img src="slides/s-92.jpg" alt="Slide 92" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="93" id="s93">
+  <div class="cab"><span class="n">93</span><span class="lab">MainFrame Mail</span><span class="est"></span></div>
+  <img src="slides/s-93.jpg" alt="Slide 93" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article>
+<article class="s" data-n="94" id="s94">
+  <div class="cab"><span class="n">94</span><span class="lab">Levas isto contigo</span><span class="est"></span></div>
+  <img src="slides/s-94.jpg" alt="Slide 94" width="1440" height="810" loading="lazy" decoding="async">
+  <div class="acts">
+    <button class="b up"   data-v="up"   title="Aprovado">&#128077;</button>
+    <button class="b down" data-v="down" title="A refazer">&#128078;</button>
+    <button class="b lock" data-v="lock" title="Fechado — n&atilde;o se mexe mais">&#128274; Lock</button>
+    <input class="nota" placeholder="o que falta neste slide (opcional)">
+  </div>
+</article></main>
+
+<div class="rodape"><div class="wrap">
+  <button class="exp" id="exportar">Copiar o estado para o chat</button>
+  <button class="filtro" id="limpar">Recomeçar</button>
+  <small id="aviso">Guardado neste browser.</small>
+</div></div>
+
+<div id="saida">
+  <textarea readonly></textarea>
+  <button class="filtro fecha">Fechar</button>
+</div>
+
+<script>
+(function(){
+  var CHAVE = 'rever-deck-94-v1';
+  var estado = {};
+  try { estado = JSON.parse(localStorage.getItem(CHAVE) || '{}'); } catch (e) { estado = {}; }
+
+  var artigos = [].slice.call(document.querySelectorAll('.s'));
+
+  function guardar(){
+    try { localStorage.setItem(CHAVE, JSON.stringify(estado)); }
+    catch (e) { document.getElementById('aviso').textContent = 'Não consegui guardar neste browser.'; }
+  }
+
+  function pintar(){
+    var c = {up:0, down:0, lock:0, na:0};
+    artigos.forEach(function(a){
+      var n = a.dataset.n;
+      var e = estado[n] || {};
+      if (e.v) { a.dataset.e = e.v; c[e.v]++; } else { delete a.dataset.e; c.na++; }
+      a.querySelector('.est').textContent =
+        e.v === 'up' ? 'aprovado' : e.v === 'down' ? 'a refazer' : e.v === 'lock' ? 'fechado' : '';
+      var nt = a.querySelector('.nota');
+      if (document.activeElement !== nt) nt.value = e.nota || '';
+    });
+    document.getElementById('c-up').textContent = c.up;
+    document.getElementById('c-down').textContent = c.down;
+    document.getElementById('c-lock').textContent = c.lock;
+    document.getElementById('c-na').textContent = c.na;
+    aplicarFiltro();
+  }
+
+  var filtro = 'todos';
+  function aplicarFiltro(){
+    artigos.forEach(function(a){
+      var v = (estado[a.dataset.n] || {}).v;
+      var mostra = filtro === 'todos'
+        || (filtro === 'abertos' && !v)
+        || (filtro === 'down' && v === 'down');
+      a.classList.toggle('oculto', !mostra);
+    });
+  }
+
+  document.addEventListener('click', function(ev){
+    var b = ev.target.closest('.b');
+    if (b) {
+      var a = b.closest('.s'), n = a.dataset.n, v = b.dataset.v;
+      estado[n] = estado[n] || {};
+      estado[n].v = (estado[n].v === v) ? null : v;   // clicar outra vez desmarca
+      if (!estado[n].v) delete estado[n].v;
+      guardar(); pintar();
+      return;
+    }
+    var f = ev.target.closest('.filtro[data-f]');
+    if (f) {
+      filtro = f.dataset.f;
+      document.querySelectorAll('.filtro[data-f]').forEach(function(x){ x.classList.toggle('on', x === f); });
+      aplicarFiltro();
+      return;
+    }
+    if (ev.target.closest('.fecha')) { document.getElementById('saida').style.display = 'none'; }
+  });
+
+  document.addEventListener('input', function(ev){
+    var nt = ev.target.closest('.nota');
+    if (!nt) return;
+    var n = nt.closest('.s').dataset.n;
+    estado[n] = estado[n] || {};
+    estado[n].nota = nt.value.trim();
+    if (!estado[n].nota) delete estado[n].nota;
+    guardar();
+  });
+
+  document.getElementById('limpar').addEventListener('click', function(){
+    if (!confirm('Apagar tudo o que marcaste?')) return;
+    estado = {}; guardar(); pintar();
+  });
+
+  document.getElementById('exportar').addEventListener('click', function(){
+    var up = [], down = [], lock = [], na = [], notas = [];
+    artigos.forEach(function(a){
+      var n = a.dataset.n, lab = a.querySelector('.lab').textContent;
+      var e = estado[n] || {};
+      var etq = n + ' ' + lab;
+      if (e.v === 'up') up.push(etq);
+      else if (e.v === 'down') down.push(etq);
+      else if (e.v === 'lock') lock.push(etq);
+      else na.push(etq);
+      if (e.nota) notas.push(n + ' ' + lab + ' → ' + e.nota);
+    });
+    var L = [];
+    L.push('ESTADO DO DECK — ' + artigos.length + ' slides');
+    L.push('');
+    L.push('A REFAZER (' + down.length + ')');
+    L.push(down.length ? down.map(function(x){ return '  · ' + x; }).join('\n') : '  (nenhum)');
+    L.push('');
+    L.push('POR DECIDIR (' + na.length + ')');
+    L.push(na.length ? na.map(function(x){ return '  · ' + x; }).join('\n') : '  (nenhum)');
+    L.push('');
+    L.push('FECHADOS (' + lock.length + ')  ·  APROVADOS (' + up.length + ')');
+    if (notas.length) { L.push(''); L.push('NOTAS'); L.push(notas.map(function(x){ return '  · ' + x; }).join('\n')); }
+    var txt = L.join('\n');
+
+    var ta = document.querySelector('#saida textarea');
+    ta.value = txt;
+    var copiado = false;
+    var t = document.createElement('textarea');
+    t.value = txt; t.setAttribute('readonly','');
+    t.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0';
+    document.body.appendChild(t); t.select(); t.setSelectionRange(0, txt.length);
+    try { copiado = document.execCommand('copy'); } catch (e) { copiado = false; }
+    t.remove();
+
+    if (copiado) {
+      document.getElementById('aviso').textContent = 'Copiado — cola no chat.';
+      setTimeout(function(){ document.getElementById('aviso').textContent = 'Guardado neste browser.'; }, 3000);
+    } else {
+      document.getElementById('saida').style.display = 'block';
+      ta.focus(); ta.select();
+    }
+  });
+
+  pintar();
+})();
+</script>
+</body>
+</html>
