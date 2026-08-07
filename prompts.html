@@ -291,6 +291,22 @@ mesmos tokens do email — se ele não fechar, o design system não está fechad
 se a resposta à pergunta 4 foi um quiz, o primeiro passo é a pergunta, o
 segundo é o email, e o último é o código.
 
+**a headline do pop-up é a oferta. sempre. sem excepção.**
+
+é a mesma regra do primeiro email: a promessa numa linha, em cima. «10% na
+primeira compra», «até 45% na black friday», «portes grátis acima de 50€» —
+isso é a headline, grande, e é a única razão pela qual alguém dá o email.
+
+a pergunta do quiz **nunca é a headline.** «o que estás a tentar resolver?» é
+descrição, vive por baixo, pequena, e existe só para justificar os botões que
+vêm a seguir. uma pergunta em cima faz o visitante pensar antes de saber o que
+ganha — e ele fecha antes de descobrir.
+
+e o pop-up é curto. três a cinco linhas de texto no passo inteiro, contando o
+título. se lá está uma frase que não seja a oferta, a pergunta, os botões ou a
+linha legal, tira-a. prova social, garantias, contagens e explicações de porque
+é que a marca existe não entram num pop-up — entram no primeiro email.
+
 um design system que eu não vejo não está aprovado. constrói-me uma página de
 design system no projeto, e é ela que me mostras:
 - a paleta em amostras grandes, com o hex por baixo de cada uma.
@@ -664,6 +680,22 @@ requisito de todos os emails.
 
 como me mostras os 31
 
+a página tem três coisas e mais nenhuma: o calendário, o leitor, e a lista
+curta do que falta. se estiveres a acrescentar uma quarta, pára.
+
+**não me ponhas o teu trabalho na página.** as contagens da variedade são para
+ti verificares antes de me mostrares — não são uma peça para eu ler. uma tabela
+com treze contagens, os limites de cada uma, e quantas voltas foram precisas
+até ficarem verdes não me diz nada que eu queira saber: se estão verdes, não
+preciso de as ver; se não estão, não me devias estar a mostrar a página.
+
+o mesmo vale para o que correu mal e como resolveste, para as decisões que eu
+não questionei, e para qualquer parágrafo que comece por explicar o processo.
+se quiseres deixar registo, escreve num ficheiro e diz-me o nome numa linha.
+
+uma linha basta, e só se falhar alguma coisa: «as contagens passaram, excepto
+x». se passaram todas, não escrevas nada.
+
 um leitor, não uma grelha de miniaturas. uma página só, no projeto:
 
 - uma barra lateral com os 31 agrupados — welcome, site, browse, carrinho,
@@ -683,19 +715,41 @@ percebe num segundo e a única que mostra o mês inteiro de uma vez.
 
 não é uma tabela de linhas. é uma grelha de calendário: as semanas em linhas,
 segunda a domingo em colunas, cada envio no dia em que sai. em cada dia, uma
-pastilha com o assunto curto, e duas leituras ao mesmo tempo:
+pastilha com o assunto curto.
 
-  a cor diz o tipo       venda · educativa · engajamento · lançamento
-  a forma diz o formato  contorno cheio = desenhado · contorno tracejado = texto
+**a cor diz o tipo, e é a única leitura da pastilha:**
+
+  venda · educativa · engajamento · lançamento
+
+nada de contorno, nada de tracejado, nada de ícone. uma segunda leitura na
+mesma pastilha faz o calendário deixar de se perceber num segundo, que é a
+única coisa que ele tem de fazer.
 
 por baixo, a legenda e três contagens: quantas de cada tipo, quantas de texto,
 e quantos dias do mês ficaram sem envio nenhum.
 
-se ao olhares para essa grelha vires duas campanhas de venda, ou dois dias
-seguidos da mesma cor, corrige antes de me mostrares — a grelha existe para eu
-ver o mês, não para eu descobrir erros que tu já podias ter visto.
+**a campanha de venda ocupa dias seguidos. não a espalhes.**
 
-por baixo do leitor: a lista das imagens que vais gerar com o custo, e os falta:.
+isto é o erro que este prompt já produziu uma vez: espalhou a venda por 15, 17,
+19 e 21 para não haver duas pastilhas da mesma cor lado a lado. está errado. uma
+venda é uma sequência com uma janela, e dentro da janela envia-se todos os dias
+— é assim que ela fatura, e é assim que o nosso próprio motor de sequências a
+monta. as formas que existem, e não há outras:
+
+  3 emails   lançamento · última chamada · extensão
+  5 emails   teaser · fundador · lançamento · última chamada · última chamada
+  7 emails   teaser · lançamento · fundador · lembrete · lembrete ·
+             última chamada · última chamada
+
+um por dia, em dias consecutivos. uma venda com buracos no meio não é uma
+sequência, é uma promoção que a lista esquece entre um email e o outro.
+
+fora da janela da venda, sim: não metas duas do mesmo tipo em dias seguidos.
+essa regra vale para as educativas, as de engajamento e as de lançamento —
+nunca para dentro da venda.
+
+e se vires duas campanhas de venda no mesmo mês, corrige antes de me mostrares.
+o tecto é uma, e novembro é a única excepção.
 
 ═══ paragem 3 · antes de tocar no klaviyo ═══
 
@@ -857,6 +911,22 @@ O pop-up é a primeira peça de design que o cliente vê e usa exactamente os
 mesmos tokens do email — se ele não fechar, o design system não está fechado.
 Se a resposta à pergunta 4 foi um quiz, o primeiro passo é a pergunta, o
 segundo é o email, e o último é o código.
+
+**A HEADLINE DO POP-UP É A OFERTA. Sempre. Sem excepção.**
+
+É a mesma regra do primeiro email: a promessa numa linha, em cima. «10% na
+primeira compra», «até 45% na Black Friday», «portes grátis acima de 50€» —
+isso é a headline, grande, e é a única razão pela qual alguém dá o email.
+
+A pergunta do quiz **nunca é a headline.** «O que estás a tentar resolver?» é
+descrição, vive por baixo, pequena, e existe só para justificar os botões que
+vêm a seguir. Uma pergunta em cima faz o visitante pensar antes de saber o que
+ganha — e ele fecha antes de descobrir.
+
+E o pop-up é curto. Três a cinco linhas de texto no passo inteiro, contando o
+título. Se lá está uma frase que não seja a oferta, a pergunta, os botões ou a
+linha legal, tira-a. Prova social, garantias, contagens e explicações de porque
+é que a marca existe não entram num pop-up — entram no primeiro email.
 
 Um design system que eu não vejo não está aprovado. Constrói-me uma PÁGINA de
 design system no projeto, e é ela que me mostras:
@@ -1231,6 +1301,22 @@ requisito de todos os emails.
 
 COMO ME MOSTRAS OS 31
 
+A página tem TRÊS coisas e mais nenhuma: o calendário, o leitor, e a lista
+curta do que falta. Se estiveres a acrescentar uma quarta, pára.
+
+**Não me ponhas o teu trabalho na página.** As contagens da variedade são para
+ti verificares antes de me mostrares — não são uma peça para eu ler. Uma tabela
+com treze contagens, os limites de cada uma, e quantas voltas foram precisas
+até ficarem verdes não me diz nada que eu queira saber: se estão verdes, não
+preciso de as ver; se não estão, não me devias estar a mostrar a página.
+
+O mesmo vale para o que correu mal e como resolveste, para as decisões que eu
+não questionei, e para qualquer parágrafo que comece por explicar o processo.
+Se quiseres deixar registo, escreve num ficheiro e diz-me o nome numa linha.
+
+Uma linha basta, e só se falhar alguma coisa: «as contagens passaram, excepto
+X». Se passaram todas, não escrevas nada.
+
 Um LEITOR, não uma grelha de miniaturas. Uma página só, no projeto:
 
 - Uma barra lateral com os 31 agrupados — welcome, site, browse, carrinho,
@@ -1250,19 +1336,41 @@ percebe num segundo e a única que mostra o mês inteiro de uma vez.
 
 Não é uma tabela de linhas. É uma GRELHA de calendário: as semanas em linhas,
 segunda a domingo em colunas, cada envio no dia em que sai. Em cada dia, uma
-pastilha com o assunto curto, e duas leituras ao mesmo tempo:
+pastilha com o assunto curto.
 
-  a COR diz o tipo       venda · educativa · engajamento · lançamento
-  a FORMA diz o formato  contorno cheio = desenhado · contorno tracejado = texto
+**A cor diz o tipo, e é a única leitura da pastilha:**
+
+  venda · educativa · engajamento · lançamento
+
+Nada de contorno, nada de tracejado, nada de ícone. Uma segunda leitura na
+mesma pastilha faz o calendário deixar de se perceber num segundo, que é a
+única coisa que ele tem de fazer.
 
 Por baixo, a legenda e três contagens: quantas de cada tipo, quantas de texto,
 e quantos dias do mês ficaram sem envio nenhum.
 
-Se ao olhares para essa grelha vires duas campanhas de venda, ou dois dias
-seguidos da mesma cor, corrige antes de me mostrares — a grelha existe para eu
-ver o mês, não para eu descobrir erros que tu já podias ter visto.
+**A CAMPANHA DE VENDA OCUPA DIAS SEGUIDOS. Não a espalhes.**
 
-Por baixo do leitor: a lista das imagens que vais gerar com o custo, e os FALTA:.
+Isto é o erro que este prompt já produziu uma vez: espalhou a venda por 15, 17,
+19 e 21 para não haver duas pastilhas da mesma cor lado a lado. Está errado. Uma
+venda é uma sequência com uma janela, e dentro da janela envia-se TODOS OS DIAS
+— é assim que ela fatura, e é assim que o nosso próprio motor de sequências a
+monta. As formas que existem, e não há outras:
+
+  3 emails   lançamento · última chamada · extensão
+  5 emails   teaser · fundador · lançamento · última chamada · última chamada
+  7 emails   teaser · lançamento · fundador · lembrete · lembrete ·
+             última chamada · última chamada
+
+Um por dia, em dias consecutivos. Uma venda com buracos no meio não é uma
+sequência, é uma promoção que a lista esquece entre um email e o outro.
+
+Fora da janela da venda, sim: não metas duas do mesmo tipo em dias seguidos.
+Essa regra vale para as educativas, as de engajamento e as de lançamento —
+nunca para dentro da venda.
+
+E se vires duas campanhas de VENDA no mesmo mês, corrige antes de me mostrares.
+O tecto é uma, e novembro é a única excepção.
 
 ═══ PARAGEM 3 · ANTES DE TOCAR NO KLAVIYO ═══
 
