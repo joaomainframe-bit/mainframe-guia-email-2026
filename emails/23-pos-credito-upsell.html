@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Post-purchase 4 — the refill" description="Post-purchase, send 4: the refill can costs less and wastes less. The reorder email, with a code." -->
+<helmet><script src="./ds-base.js"></script><style>body{margin:0}</style></helmet>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.EmailShell" theme="{{ theme }}" preheader="The refill costs less than the bottle. Here is why." hint-size="100%,100%">
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ImageBlock" src="https://www.graza.co/cdn/shop/files/Trio_PDP_4.png" alt="Refill cans next to the squeeze bottles" ratio="16 / 9" overlay="bottom" align="bottom" logo="{{ true }}" fullBleed="{{ true }}" hint-size="100%,337px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+<p style="font-family:var(--font-display);font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:#D1E030;margin:0">About now</p>
+<h1 style="font-family:var(--font-display);font-size:34px;line-height:1.08;font-weight:400;text-transform:uppercase;letter-spacing:0.04em;color:#FFF4EC;margin:0;text-wrap:balance">Your bottle is nearly empty</h1>
+
+</div>
+</x-import>
+
+<div style="background:var(--surface-inverse);color:var(--text-on-inverse);padding:26px 32px 30px;text-align:center">
+<p style="font-size:20px;line-height:1.45;margin:0 0 20px;text-wrap:pretty">Keep the squeeze bottle. Refill it from the can — same oil, less packaging.</p>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.CodeChip" code="{{ offerCode }}" label="Your code" tone="lime" labelTone="cream" hint-size="200px,70px"></x-import>
+<div style="height:20px"></div>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Button" href="https://graza.co/collections/refills" variant="secondary" size="lg" hint-size="260px,64px">Refill my bottle</x-import>
+</div>
+
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Transition" label="why a can and not a bottle" variant="rule" ground="page" hint-size="100%,44px"></x-import>
+<div style="background:var(--surface-email);padding:30px 32px;text-align:center">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.FactStat" value="5,000" label="Olives in one bottle of Drizzle. Worth refilling rather than replacing." hint-size="100%,140px"></x-import>
+</div>
+
+
+<div style="background:var(--surface-inverse);color:var(--text-on-inverse);padding:26px 32px 30px;text-align:center">
+<p style="font-size:20px;line-height:1.45;margin:0 0 20px;text-wrap:pretty">The can costs less than the bottle, and the bottle stays with you.</p>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Button" href="https://graza.co/collections/refills" variant="secondary" size="lg" hint-size="260px,60px">Refill my bottle</x-import>
+</div>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Footer" hint-size="100%,470px"></x-import>
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:600,&quot;height&quot;:1500},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;\&quot;auto\&quot; | \&quot;light\&quot; | \&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Rendering&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "auto",
+      true: true,
+      offerCode: this.props.offerCode ?? "REFILL10",
+      dummy: null
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Cart email 2 — social proof" description="Abandoned cart, send 2: the is-it-worth-it objection answered by a verified review over the photo, then the dynamic cart block and the trust row. No discount." -->
+<helmet><script src="./ds-base.js"></script><style>body{margin:0}</style></helmet>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.EmailShell" theme="{{ theme }}" preheader="4.9 out of 5, from 4,515 people who also hesitated." hint-size="100%,100%">
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ImageBlock" src="https://www.graza.co/cdn/shop/files/trio-plus_frizzle-spray_f20e9a13-498a-40cd-aa78-e6a851af00d5.jpg" alt="The Graza bottles together on a counter" ratio="16 / 9" overlay="bottom" align="bottom" logo="{{ true }}" fullBleed="{{ true }}" hint-size="100%,337px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+<p style="font-family:var(--font-display);font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:#D1E030;margin:0">Two bottles, one question</p>
+<h1 style="font-family:var(--font-display);font-size:34px;line-height:1.08;font-weight:400;text-transform:uppercase;letter-spacing:0.04em;color:#FFF4EC;margin:0;text-wrap:balance">Is it worth it? Kimberly says yes.</h1>
+<div data-klaviyo-href="[[ event.extra.checkout_url|default:organization.url ]]">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Button" href="https://graza.co/cart" size="lg" hint-size="250px,60px">Finish checking out</x-import>
+</div>
+</div>
+</x-import>
+
+<div style="background:var(--surface-inverse);color:var(--text-on-inverse);padding:28px 32px 30px;text-align:center">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ProofQuote" ground="green" quote="We love the taste the oil imparts on the food we cook and eat. The sizzle doesn't burn. The drizzle is very tasty on salads." attribution="Kimberly · verified review" style="{{ quoteStyle }}" hint-size="100%,200px"></x-import>
+</div>
+
+<!-- PRODUTOS DO CARRINHO: variáveis declaradas. Este bloco NUNCA vira imagem. -->
+<div data-klaviyo-loop="event.extra.line_items"
+     data-klaviyo-alias="item"
+     data-klaviyo-fields='{"name":"[[ item.product.title ]]","qty":"Quantity: [[ item.quantity|floatformat:0 ]]","price":"$[[ item.line_price|floatformat:2 ]]","size":"[[ item.variant_title ]]","image":"{% if item.product.variant.images.0.src %}[[ item.product.variant.images.0.src ]]{% else %}[[ item.product.images.0.src ]]{% endif %}","href":"[[ event.extra.checkout_url|default:organization.url ]]"}'
+     style="background:var(--surface-tint);padding:22px 32px;display:grid;gap:14px;border-bottom:1px solid var(--email-outline)">
+<sc-for list="{{ cartItems }}" as="item" hint-placeholder-count="2">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ProductCard" layout="row" href="https://graza.co/cart" name="{{ item.name }}" tagline="{{ item.qty }}" price="{{ item.price }}" size="{{ item.size }}" image="{{ item.image }}" hint-size="100%,116px"></x-import>
+</sc-for>
+</div>
+<!-- FIM PRODUTOS DO CARRINHO -->
+
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Transition" label="what you were taking" variant="rule" ground="tint" hint-size="100%,44px"></x-import>
+<div style="background:var(--surface-email);padding:28px 32px 34px;text-align:center">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.IconBullets" items="{{ seals }}" hint-size="100%,120px"></x-import>
+<div style="height:24px"></div>
+<div data-klaviyo-href="[[ event.extra.checkout_url|default:organization.url ]]">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Button" href="https://graza.co/cart" size="lg" hint-size="260px,64px">Finish checking out</x-import>
+</div>
+</div>
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Footer" hint-size="100%,470px"></x-import>
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:600,&quot;height&quot;:1700},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;\&quot;auto\&quot; | \&quot;light\&quot; | \&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Rendering&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "auto",
+      true: true,
+      quoteStyle: { background: "transparent", padding: "0" },
+      seals: [
+        "4.9 out of 5 · 4,515 verified reviews",
+        "Free shipping on qualifying orders",
+        "[return / guarantee policy — not supplied, do not send without it]"
+      ],
+      cartItems: [
+        { name: "Sizzle", qty: "Quantity: 1", price: "$16", size: "750ml", image: "https://www.graza.co/cdn/shop/files/30_product_sizzle750ml_0002_fe965569-a5c7-45ca-8809-47da9aba1e32.jpg" },
+        { name: "Drizzle", qty: "Quantity: 1", price: "$21", size: "500ml", image: "https://www.graza.co/cdn/shop/files/driz.jpg" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

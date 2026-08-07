@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Cart email 4 — discount" description="Abandoned cart, send 4: the only email in the flow carrying a discount. Code and CTA in the first 600px, then the dynamic cart block." -->
+<helmet><script src="./ds-base.js"></script><style>body{margin:0}</style></helmet>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.EmailShell" theme="{{ theme }}" preheader="15% off the cart you left. It's the last one we send." hint-size="100%,100%">
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ImageBlock" src="https://www.graza.co/cdn/shop/files/driz.jpg" alt="Drizzle, the finishing bottle" ratio="16 / 9" overlay="bottom" align="bottom" logo="{{ true }}" fullBleed="{{ true }}" hint-size="100%,337px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+<p style="font-family:var(--font-display);font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:#D1E030;margin:0">Last email about this</p>
+<h1 style="font-family:var(--font-display);font-size:36px;line-height:1.06;font-weight:400;text-transform:uppercase;letter-spacing:0.04em;color:#FFF4EC;margin:0;text-wrap:balance">Fine. Here's 15% off.</h1>
+</div>
+</x-import>
+
+<div style="background:var(--surface-inverse);color:var(--text-on-inverse);padding:26px 32px 30px;text-align:center">
+<p style="font-size:20px;line-height:1.45;margin:0 0 20px;text-wrap:pretty">We'd rather you tasted it than kept scrolling past it.</p>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.CodeChip" code="{{ offerCode }}" label="Your code" tone="lime" labelTone="cream" hint-size="200px,70px"></x-import>
+<div style="height:20px"></div>
+<div data-klaviyo-href="[[ event.extra.checkout_url|default:organization.url ]]">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Button" href="https://graza.co/cart" variant="secondary" size="lg" hint-size="270px,64px">Use my 15% now</x-import>
+</div>
+</div>
+
+
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Transition" label="what the code is for" variant="rule" ground="page" hint-size="100%,44px"></x-import>
+
+<!-- PRODUTOS DO CARRINHO: variáveis declaradas. Este bloco NUNCA vira imagem. -->
+<div data-klaviyo-loop="event.extra.line_items"
+     data-klaviyo-alias="item"
+     data-klaviyo-fields='{"name":"[[ item.product.title ]]","qty":"Quantity: [[ item.quantity|floatformat:0 ]]","price":"$[[ item.line_price|floatformat:2 ]]","size":"[[ item.variant_title ]]","image":"{% if item.product.variant.images.0.src %}[[ item.product.variant.images.0.src ]]{% else %}[[ item.product.images.0.src ]]{% endif %}","href":"[[ event.extra.checkout_url|default:organization.url ]]"}'
+     style="background:var(--surface-tint);padding:22px 32px;display:grid;gap:14px;border-top:1px solid var(--email-outline);border-bottom:1px solid var(--email-outline)">
+<sc-for list="{{ cartItems }}" as="item" hint-placeholder-count="2">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ProductCard" layout="row" href="https://graza.co/cart" name="{{ item.name }}" tagline="{{ item.qty }}" price="{{ item.price }}" size="{{ item.size }}" image="{{ item.image }}" hint-size="100%,116px"></x-import>
+</sc-for>
+</div>
+<!-- FIM PRODUTOS DO CARRINHO -->
+
+<div style="background:var(--surface-email);padding:26px 32px 32px;text-align:center">
+<p style="font-size:14px;color:var(--text-muted);margin:0">The code works once, on this cart, for 48 hours.</p>
+</div>
+
+
+<div style="background:var(--surface-inverse);color:var(--text-on-inverse);padding:26px 32px 30px;text-align:center">
+<p style="font-size:20px;line-height:1.45;margin:0 0 20px;text-wrap:pretty">One use, this cart, 48 hours.</p>
+<div data-klaviyo-href="[[ event.extra.checkout_url|default:organization.url ]]">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Button" href="https://graza.co/cart" variant="secondary" size="lg" hint-size="260px,60px">Use my 15% now</x-import>
+</div>
+</div>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Footer" hint-size="100%,470px"></x-import>
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:600,&quot;height&quot;:1500},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;\&quot;auto\&quot; | \&quot;light\&quot; | \&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Rendering&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "auto",
+      true: true,
+      offerCode: this.props.offerCode ?? "CART15",
+      cartItems: [
+        { name: "Sizzle", qty: "Quantity: 1", price: "$16", size: "750ml", image: "https://www.graza.co/cdn/shop/files/30_product_sizzle750ml_0002_fe965569-a5c7-45ca-8809-47da9aba1e32.jpg" },
+        { name: "Drizzle", qty: "Quantity: 1", price: "$21", size: "500ml", image: "https://www.graza.co/cdn/shop/files/driz.jpg" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

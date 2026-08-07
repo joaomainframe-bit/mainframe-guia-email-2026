@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anexo técnico — curso de email marketing</title>
+<style>
+:root{--bg:#0a0a0a;--bg-2:#121014;--line:#2a2430;--tx:#f6f6f6;--tx-2:#a9a2b0;--tx-3:#736c7d;
+ --accent:#c05dc8;--roxo:#3c1d51;--warn:#ffb347;--bad:#ff6b6b;
+ --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+ --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);line-height:1.6}
+.wrap{max-width:860px;margin:0 auto;padding:70px 26px 120px}
+h1{font:700 44px/1.15 var(--sans);letter-spacing:-.02em;margin:0 0 14px}
+h2{font:700 27px/1.25 var(--sans);margin:64px 0 14px;padding-top:24px;border-top:1px solid var(--line)}
+h3{font:600 19px/1.3 var(--sans);margin:34px 0 10px;color:var(--accent)}
+p{color:var(--tx-2);margin:0 0 15px}
+a{color:var(--accent)}
+.lead{font-size:20px;color:var(--tx);margin-bottom:34px}
+pre{background:#08080a;border:1px solid var(--line);border-radius:10px;padding:18px 20px;
+ overflow-x:auto;font:400 13.5px/1.7 var(--mono);color:#c7bfd0;margin:0 0 18px}
+code{font:400 13.5px var(--mono);background:#1a1620;padding:2px 6px;border-radius:4px;color:var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 20px}
+th{text-align:left;font:600 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+ color:var(--tx-3);padding:0 12px 10px}
+td{padding:11px 12px;border-top:1px solid var(--line);color:var(--tx-2);vertical-align:top}
+td:first-child{color:var(--tx);white-space:nowrap;font-family:var(--mono);font-size:13px}
+.aviso{border-left:3px solid var(--warn);background:rgba(255,179,71,.05);padding:14px 18px;margin:0 0 18px;border-radius:0 8px 8px 0}
+.aviso b{color:var(--warn)}
+.volta{display:inline-block;margin-bottom:40px;font:600 13px/1 var(--mono);letter-spacing:.1em;
+ text-transform:uppercase;color:var(--tx-3);text-decoration:none}
+ul{color:var(--tx-2);padding-left:22px}li{margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="volta" href="../index.html">← o guia</a>
+<h1>Anexo técnico</h1>
+<p class="lead">O que não se narra num palco: o contrato do bloco dinâmico, as variáveis do
+Klaviyo, os sítios onde a documentação deles está errada, as regras de design em bruto, e
+as ferramentas que correm tudo isto.</p>
+
+<h2>1 · O bloco dinâmico</h2>
+<p>Num email de abandono, os produtos não são uma imagem: são variáveis que o Klaviyo
+substitui por pessoa. O bloco declara-se, não se comenta — quem o substitui é uma máquina,
+e um comentário em HTML não lhe diz nada.</p>
+<pre>&lt;div data-klaviyo-loop="event.extra.line_items"
+     data-klaviyo-alias="item"
+     data-klaviyo-fields='{"name":"[[ item.product.title ]]",
+       "qty":"Quantity: [[ item.quantity|floatformat:0 ]]",
+       "price":"$[[ item.line_price|floatformat:2 ]]",
+       "image":"[[ item.product.images.0.src ]]",
+       "href":"[[ event.extra.checkout_url ]]"}'&gt;
+  &lt;!-- aqui dentro, DOIS produtos de exemplo, reais e bonitos --&gt;
+&lt;/div&gt;</pre>
+<h3>Porque é <code>[[ ]]</code> e não <code>{{ }}</code></h3>
+<p>O motor do Claude Design interpola <code>{{ }}</code> dentro de atributos e apaga
+o que não reconhece. Escrever Liquid directamente no atributo dava um atributo vazio.
+Escreve-se <code>[[ ]]</code> no desenho e o fatiador converte para <code>{{ }}</code>
+no fim, quando já ninguém interpola nada.</p>
+<div class="aviso"><b>O que declarar:</b> <code>data-klaviyo-loop</code> é a colecção,
+<code>data-klaviyo-alias</code> é o nome de cada item dentro do ciclo, e
+<code>data-klaviyo-fields</code> mapeia cada campo visível do cartão para a expressão que o
+substitui. Desenha-se com <b>dois</b> produtos a sério, para se ver o espaçamento entre eles.</p></div>
+
+<h2>2 · As variáveis do Klaviyo, por flow</h2>
+<h3>Carrinho e checkout abandonados</h3>
+<pre>Imagem (Dynamic Image):
+{% if item.product.variant.images.0.src %}{{item.product.variant.images.0.src}}{%else%}{{item.product.images.0.src|missing_product_image}}{%endif%}
+
+Nome do produto:  {{ item.product.title }}
+Quantidade:       {{ item.quantity|floatformat:0 }}
+Preço:            {% currency_format item.line_price|floatformat:2 %}
+
+Link do checkout:              {{ event.extra.checkout_url }}
+Link do checkout com desconto: {{ event.extra.checkout_url }}?discount=DESCONTO123</pre>
+<h3>O mesmo, quando o trigger é o carrinho e não o checkout</h3>
+<pre>Imagem (Dynamic Image):  {{ event.ImageURL|default:'' }}
+Nome do produto:         {{ event|lookup:'Product Name'|default:'' }}
+Quantidade:              {{ event.Quantity|default:'' }}
+Preço:                   {{ event|lookup:'$value'|default:'' }}
+
+Link do carrinho:
+{{ organization.url|trim_slash }}/cart
+
+Link do carrinho já com desconto aplicado:
+{{ organization.url|trim_slash }}/discount/{% coupon_code 'DESCONTO123' %}?redirect=/cart</pre>
+<h3>Browse abandon (Viewed Product)</h3>
+<pre>Cria uma Tabela no Klaviyo. Imagem à esquerda, texto à direita.
+
+Imagem (Dynamic Image):   {{ event.Name|default:'' }}
+Nome do produto:          {{ event.Name }}
+Preço:                    {{ event.Price|striptags }}
+Link (imagem, texto, botão): {{ event.URL }}</pre>
+
+<h2>3 · Onde a documentação do Klaviyo está errada</h2>
+<p>Três coisas na documentação pública não batem certo com a API a correr. Todas foram
+tiradas de objectos reais lidos da conta, não do site deles.</p>
+<table>
+<tr><th>Onde</th><th>O que a documentação diz</th><th>O que a API aceita</th></tr>
+<tr><td>POST /flows</td><td>Exemplo sem <code>entry_action_id</code></td>
+<td>Sem esse campo a definição inteira é recusada. E <code>list_id</code>,
+<code>from</code> e <code>template_id</code> ao nível da acção são rejeitados — vão dentro
+de <code>data.message</code>.</td></tr>
+<tr><td>POST /forms</td><td><code>ab_test</code> como objecto</td>
+<td>É um booleano. E o formulário precisa de dois passos no mínimo.</td></tr>
+<tr><td>Imagem de produto</td><td><code>images.first.src</code></td>
+<td><code>images.0.src</code>, com <code>variant.images.0.src</code> à frente e
+<code>missing_product_image</code> como rede.</td></tr>
+</table>
+<div class="aviso"><b>Splits condicionais:</b> a API <i>cria</i> ramos. A definição aceita
+acções <code>conditional-split</code> com <code>next_if_true</code> e
+<code>next_if_false</code> e um <code>profile_filter</code>. Os nossos flows saem em linha
+recta por escolha, não por limitação — e a escolha está por rever.</div>
+
+<h2>4 · As regras de design, em bruto</h2>
+<p>É este bloco que vai dentro do brand file e que o gerador lê antes de desenhar
+qualquer coisa. Não é documentação: é a instrução.</p>
+<pre>============================================================
+REGRAS DE DESIGN — aplicar a TODOS os emails deste sistema
+============================================================
+
+ESTRUTURA
+- Largura 600px. 24px de respiro lateral mínimo, nada encosta às margens.
+- Os primeiros 600px de altura ("above the fold") valem 90% do email.
+  Lá dentro tem de caber: logótipo, a proposta em uma linha, e um CTA.
+- Um email trata de UM assunto. Dois assuntos são dois emails.
+- Ordem: logo -> visual/headline -> corpo curto -> CTA -> prova -> rodapé.
+
+ABOVE THE FOLD, OBRIGATÓRIO
+- Logótipo no topo, com link só para a homepage.
+- ZERO links de navegação para categorias no topo.
+- Se há oferta, o código e o botão estão nos primeiros 600px.
+- Headline que abre um loop ou cria curiosidade, não que descreve.
+- Hierarquia clara: uma coisa é obviamente a mais importante do ecrã.
+- Texto centrado.
+
+TEXTO
+- Frases curtas. Nenhum parágrafo com mais de 3 linhas.
+- Corta as palavras que se podem cortar sem mudar o sentido.
+- Corpo a 20px. Texto em cartões e grelhas a 16px. Nunca abaixo de 14px.
+- Negrito e espaçamento para guiar o olho, não para decorar.
+- A oferta, se existir, é o primeiro elemento que se lê.
+
+VISUAL
+- Prefere um infográfico a um parágrafo: linha temporal, checklist,
+  bullets com ícones, tabela comparativa, diagrama, números.
+- Cada bloco nasce do anterior. O email é uma linha de pensamento, não uma
+  pilha de secções. Se um bloco pudesse ser removido sem se notar, remove-o.
+
+BOTÕES
+- Um CTA nos primeiros 600px. Sempre. Sem excepção.
+- Um CTA a fechar o email.
+- E um CTA sempre que um bloco acaba de dar uma razão para comprar.
+  Dá dois a quatro por email. Um só botão obriga quem já decidiu à
+  terceira banda a fazer scroll até ao fim para poder comprar.
+- Todos os CTAs de um email vão ao MESMO sítio. Dois destinos diferentes
+  no mesmo email são dois emails.
+- Nunca dois botões a competir no mesmo ecrã.
+- O texto do botão é um verbo mais a coisa. Nunca "saber mais".
+
+TRANSIÇÕES — o que liga as bandas
+- Uma transição pertence à banda de CIMA. É o bordo dela, não uma secção
+  nova. Posta na banda de baixo, separa o que devia unir.
+- Só ganha o lugar onde a cor MUDA de verdade. Uma forma entre duas bandas
+  da mesma cor é decoração sem função — e é o erro mais comum.
+- A cor anda para a frente e nunca volta atrás. Um fundo que abandonaste
+  não regressa. Não é o número de cores que estraga um email: é o pêndulo.
+- Escolhe a ferramenta pela relação de tom entre as duas bandas:
+    · a cor muda        -> uma forma (curva, rasgo, diagonal, gota)
+    · duas bandas claras -> uma linha com uma frase curta que carrega o
+                            argumento ("e depois disto", "a prova ↓")
+    · duas bandas escuras -> nada. Lêem-se como um só campo contínuo.
+- Uma fotografia não conta como mudança de cor: creme -> foto -> creme
+  não é um pêndulo, é uma batida visual.
+- Uma forma por email, e sempre a mesma. Nunca misturar duas.
+  As barulhentas (rasgo, serrilha) no máximo uma vez.
+- Nunca na última banda, nunca a entrar no rodapé, e nunca no bordo de uma
+  fotografia — o bordo de uma foto mascara-se, não se costura.
+
+DARK MODE — OBRIGATÓRIO
+- 82% dos leitores usam dark mode. O objectivo NÃO é o email inverter bem.
+  É o email NÃO MUDAR NADA quando o cliente está em dark mode.
+- A solução é 0% de texto vivo: as bandas de arte saem como IMAGEM.
+  O que é imagem não inverte, não muda de cor, não parte.
+- Excepções que ficam sempre em texto vivo, porque têm de ser:
+  · o bloco de produto dinâmico (as variáveis do Klaviyo)
+  · o rodapé (os links têm de ser clicáveis e o unsubscribe legal)
+  · os emails inteiramente de texto do fundador
+- Nessas excepções, escolhe cores que aguentem os dois modos e nunca uses
+  cinzentos claros para texto.
+
+NUNCA
+- Nunca dois CTAs a competir no mesmo ecrã.
+- Nunca uma imagem acima de 300kb.
+- Nunca o mesmo layout em dois emails seguidos do mesmo flow.</pre>
+
+<h2>5 · As ferramentas</h2>
+<table>
+<tr><th>Ficheiro</th><th>O que faz</th></tr>
+<tr><td>fatiar.mjs</td><td>Renderiza o email, decide o que é arte e o que fica vivo, corta as bandas em PNG e escreve o <code>plano.json</code>. Recusa-se a fatiar se a página deu erro ou se o render tem menos de 300px.</td></tr>
+<tr><td>klaviyo.mjs</td><td>A camada de API: <code>definicaoLinear</code>, criar template, criar flow, ler flow. Repete pedidos que falham por rede, 429 ou 5xx até quatro vezes.</td></tr>
+<tr><td>publicar-flow.mjs</td><td>De um email desenhado a um flow em rascunho.</td></tr>
+<tr><td>publicar-campanha.mjs</td><td>O mesmo para um envio único. Nunca agenda nem envia.</td></tr>
+<tr><td>construir-tudo.mjs</td><td>Lê o <code>programa.json</code> e constrói os cinco flows, as campanhas e o pop-up. Idempotente, tudo em rascunho, e recusa-se a tocar num flow que esteja live.</td></tr>
+<tr><td>_tiras.mjs</td><td>Corta um email alto em colunas lado a lado, para caber inteiro num slide sem scroll.</td></tr>
+<tr><td>_empilhar.mjs</td><td>Reconstrói um email a partir das imagens que o compõem, para trazer emails reais da caixa de correio.</td></tr>
+<tr><td>_gamma-visuais.mjs</td><td>Colhe imagens de um documento do Gamma com a secção e o rótulo onde viviam.</td></tr>
+<tr><td>_verificar-deck.mjs</td><td>O portão da apresentação: transbordo, imagens partidas, slides sem visual, prosa a mais.</td></tr>
+<tr><td>_pdf.mjs · _pptx.mjs</td><td>Saída para PDF e para PowerPoint com notas do orador.</td></tr>
+</table>
+
+<h3>O que o construir-tudo recusa</h3>
+<ul>
+<li>Um render partido — um componente com propriedades erradas dá um email de 60px que continua a ser HTML válido.</li>
+<li>Um template sem <code>{% unsubscribe_link %}</code>. O Klaviyo aceita-o na mesma; é ilegal e é silencioso.</li>
+<li>Um <code>[placeholder]</code> por preencher — morada postal, política de devolução.</li>
+<li>Links mortos (<code>href="#"</code>).</li>
+<li>Uma métrica em falta no trigger: sem <i>Viewed Product</i>, o browse abandon fica live com zero entradas.</li>
+</ul>
+<p>Nada disto impede o rascunho. Tudo isto impede o envio — e é por isso que sai como aviso
+no fim, em vez de rebentar a meio.</p>
+
+</div>
+</body>
+</html>

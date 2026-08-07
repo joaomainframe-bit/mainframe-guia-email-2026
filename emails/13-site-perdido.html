@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Site abandon — the re-open" description="Site abandon: no product data in the event, so the email carries the three entry products instead." -->
+<helmet><script src="./ds-base.js"></script><style>body{margin:0}</style></helmet>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.EmailShell" theme="{{ theme }}" preheader="You came by. Here is where most people start." hint-size="100%,100%">
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ImageBlock" src="https://www.graza.co/cdn/shop/articles/IB_Wide-Base_Graza-Pot-Roast_Static_04.jpg" alt="A pot roast finished with olive oil" ratio="16 / 11" overlay="bottom" align="bottom" logo="{{ true }}" fullBleed="{{ true }}" hint-size="100%,412px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+<p style="font-family:var(--font-display);font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:#D1E030;margin:0">You stopped by</p>
+<h1 style="font-family:var(--font-display);font-size:34px;line-height:1.08;font-weight:400;text-transform:uppercase;letter-spacing:0.04em;color:#FFF4EC;margin:0;text-wrap:balance">Three bottles. One of them is yours.</h1>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Button" href="https://graza.co/collections/best-sellers" size="lg" hint-size="250px,60px">Pick my bottle</x-import>
+</div>
+</x-import>
+
+<div style="background:var(--surface-email);padding:30px 32px;text-align:center">
+<p style="font-size:20px;line-height:1.5;margin:0 0 24px;text-wrap:pretty">Sizzle for heat. Drizzle for the finish. Frizzle for everything you fry. Most people start with one.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ProductCard" name="Sizzle" tagline="Use it every day, in every way." price="$16" size="750ml" href="https://graza.co/products/sizzle" image="https://www.graza.co/cdn/shop/files/30_product_sizzle750ml_0002_fe965569-a5c7-45ca-8809-47da9aba1e32.jpg" hint-size="100%,300px"></x-import>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ProductCard" name="Drizzle" tagline="Made for eating, never heating." price="$21" size="500ml" href="https://graza.co/products/drizzle" image="https://www.graza.co/cdn/shop/files/driz.jpg" hint-size="100%,300px"></x-import>
+</div>
+</div>
+
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Transition" label="or skip the choosing" variant="rule" ground="page" hint-size="100%,44px"></x-import>
+<div style="background:var(--surface-inverse);color:var(--text-on-inverse);padding:28px 32px 32px;text-align:center">
+<p style="font-size:20px;line-height:1.45;margin:0 0 20px">Or take all three and stop choosing.</p>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Button" href="https://graza.co/products/the-trio" variant="secondary" size="lg" hint-size="260px,64px">Get the Trio · $45</x-import>
+</div>
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Footer" hint-size="100%,470px"></x-import>
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:600,&quot;height&quot;:1800},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;\&quot;auto\&quot; | \&quot;light\&quot; | \&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Rendering&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "auto",
+      true: true,
+      dummy: null
+    };
+  }
+}
+</script>
+</body>
+</html>

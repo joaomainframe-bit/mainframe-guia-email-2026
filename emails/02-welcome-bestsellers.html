@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Welcome email 2 — best sellers" description="Welcome flow, send 2: photographic hero, then the 2x2 best-seller grid with the photos carrying the block. One CTA." -->
+<helmet><script src="./ds-base.js"></script><style>body{margin:0}</style></helmet>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.EmailShell" theme="{{ theme }}" preheader="Four bottles our customers keep buying again." hint-size="100%,100%">
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ImageBlock" src="https://www.graza.co/cdn/shop/files/Trio_PDP_4.png" alt="Sizzle, Drizzle and Frizzle side by side" ratio="16 / 11" overlay="bottom" align="bottom" logo="{{ true }}" fullBleed="{{ true }}" hint-size="100%,412px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+<p style="font-family:var(--font-display);font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:#FFF4EC;margin:0">Welcome, part two</p>
+<h1 style="font-family:var(--font-display);font-size:38px;line-height:1.06;font-weight:400;text-transform:uppercase;letter-spacing:0.04em;color:#FFF4EC;margin:0;text-wrap:balance">You don't have to guess. They already did.</h1>
+</div>
+</x-import>
+
+<div style="background:var(--surface-inverse);color:var(--text-on-inverse);padding:24px 32px 28px;text-align:center">
+<p style="font-size:22px;line-height:1.45;margin:0 0 12px;text-wrap:pretty">Four bottles our customers keep buying again.</p>
+<p style="font-size:16px;line-height:1.45;font-weight:700;margin:0 0 22px">★★★★★ 4.9 out of 5 · 4,515 reviews</p>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Button" href="https://graza.co/collections/best-sellers" variant="secondary" size="lg" hint-size="280px,64px">See all best-sellers</x-import>
+</div>
+
+
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Transition" label="the four that keep coming back" variant="rule" ground="page" hint-size="100%,44px"></x-import>
+<div style="background:var(--surface-email);padding:10px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ProductCard" name="Sizzle" tagline="Cook anything, every single day." price="$16" size="750ml" note="Most reordered" image="https://www.graza.co/cdn/shop/files/30_product_sizzle750ml_0002_fe965569-a5c7-45ca-8809-47da9aba1e32.jpg" hint-size="100%,340px"></x-import>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ProductCard" name="Drizzle" tagline="Finishes food. Never sees heat." price="$21" size="500ml" note="Most gifted" image="https://www.graza.co/cdn/shop/files/driz.jpg" hint-size="100%,340px"></x-import>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ProductCard" name="The Trio" tagline="All three. One decision." price="$45" size="Set" note="Best value" image="https://www.graza.co/cdn/shop/files/trio-plus_frizzle-spray_f20e9a13-498a-40cd-aa78-e6a851af00d5.jpg" hint-size="100%,340px"></x-import>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ProductCard" name="Frizzle" tagline="High heat, zero smoke." price="$14" size="750ml" note="Fry night hero" image="https://www.graza.co/cdn/shop/files/squeeze.jpg" hint-size="100%,340px"></x-import>
+</div>
+</div>
+
+<div style="background:var(--surface-tint);padding:24px 32px 30px;text-align:center;border-top:1px solid var(--email-outline)">
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.ProofQuote" quote="Great gift for a friend who loves to cook. Such a nice flavor!!" attribution="Margaret" hint-size="100%,170px"></x-import>
+<p style="font-size:16px;line-height:1.45;color:var(--text-muted);margin:20px 0 0">Still sitting on your welcome code? It's <b style="color:var(--text-body)">{{ offerCode }}</b>.</p>
+</div>
+
+
+<div style="background:var(--surface-inverse);color:var(--text-on-inverse);padding:26px 32px 30px;text-align:center">
+<p style="font-size:20px;line-height:1.45;margin:0 0 20px;text-wrap:pretty">If you only take one, take Sizzle. It is where everyone starts.</p>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Button" href="https://graza.co/products/sizzle" variant="secondary" size="lg" hint-size="260px,60px">Start with Sizzle · $16</x-import>
+</div>
+<x-import component-from-global-scope="GrazaEmailDesignSystem_755028.Footer" hint-size="100%,470px"></x-import>
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:600,&quot;height&quot;:1750},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;\&quot;auto\&quot; | \&quot;light\&quot; | \&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Rendering&quot;},&quot;offerCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;FRESH15&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Offer&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "auto",
+      offerCode: this.props.offerCode ?? "FRESH15",
+      true: true
+    };
+  }
+}
+</script>
+</body>
+</html>
